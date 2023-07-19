@@ -4,7 +4,7 @@ const welcomeMessage = document.querySelector('#welcome-message')
 const loginModal = document.querySelector('#login-modal')
 const logoutBtn = document.querySelector('#btn-logout')
 if (currentUser) {
-  welcomeMessage.textContent = `Welcome ${currentUser.firstName} ${currentUser.lastName}`
+  welcomeMessage.textContent = `Welcome ${currentUser.firstName}`
   loginModal.style.display = 'none'
 } else { 
   loginModal.style.display = 'block'
