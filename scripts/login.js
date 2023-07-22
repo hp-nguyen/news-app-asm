@@ -65,7 +65,4 @@ loginBtn.addEventListener('click', function (e) {
   window.location.href = '../index.html';
 });
 
-document.querySelector('body').addEventListener('keypress', function(e) {
-  console.log(e)
-})
 
