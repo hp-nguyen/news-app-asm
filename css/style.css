@@ -8463,3 +8463,7 @@ select.invalid {
 .invalid-message {
   color: red;
 }
+.card-img {
+  height: 100%;
+  object-fit: cover;
+}
