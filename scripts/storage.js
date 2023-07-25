@@ -1,7 +1,11 @@
-'use strict'
-const usersKey = 'userArr'
-const currentUserKey = 'currentUser'
-const userArr = JSON.parse(localStorage.getItem(usersKey)) || []
+'use strict';
+const usersKey = 'userArr';
+const userArr = getFromStorage(usersKey) || [];
+const currentUserKey = 'currentUser';
+const currentUser = getFromStorage(currentUserKey);
+const todoArrKey = 'todoArr';
+const todoArr = getFromStorage(todoArrKey) || [];
+
 // Hàm lưu data vào local storage
 function saveToStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));

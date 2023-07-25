@@ -33,7 +33,7 @@ function emptyFieldCheck(field) {
 // Hàm kiểm tra xem có bất kỳ trường nào bị bỏ trống hay không
 function noEmptyCheck(fields) {
   let isValid = true; // True có nghĩa là không có trường nào bị bỏ trống
-  fields.forEach((field) => {
+  fields.forEach(field => {
     if (emptyFieldCheck(field)) isValid = false;
   });
   return isValid;
@@ -42,10 +42,12 @@ function noEmptyCheck(fields) {
 function loginCheck() {
   const username = inputUsername.value;
   const password = inputPassword.value;
-  const currentUser = userArr.find((user) => user.username === username && user.password === password);
+  let currentUser = userArr.find(
+    user => user.username === username && user.password === password
+  );
   if (!currentUser) {
     showInvalidMessage(inputUsername, 'Wrong username or password!');
-    removeInvalidMessage(inputPassword)
+    removeInvalidMessage(inputPassword);
     return false;
   }
   saveToStorage(currentUserKey, currentUser);
@@ -54,9 +56,9 @@ function loginCheck() {
 
 // Hàm kiểm tra thông tin đăng nhập hợp lệ
 function validateData() {
-  if (!noEmptyCheck(formFields)) return false
-  if (!loginCheck()) return false
-  return true
+  if (!noEmptyCheck(formFields)) return false;
+  if (!loginCheck()) return false;
+  return true;
 }
 // Xử lý khi ấn nút login
 loginBtn.addEventListener('click', function (e) {
@@ -64,5 +66,3 @@ loginBtn.addEventListener('click', function (e) {
   if (!validateData()) return;
   window.location.href = '../index.html';
 });
-
-

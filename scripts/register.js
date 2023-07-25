@@ -107,7 +107,7 @@ submitBtn.addEventListener('click', function (e) {
   // Kiểm tra form hợp lệ
   if (!validateData()) return
   // Khởi tạo user mới với các dữ liệu hợp lệ
-  const newUser = new User(...Object.values(data))
+  const newUser = new User(data)
   // Thêm user vào mảng, lưu mảng vào localStorage
   userArr.push(newUser)
   saveToStorage(usersKey, userArr)
