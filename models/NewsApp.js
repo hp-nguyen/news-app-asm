@@ -75,7 +75,7 @@ class NewsApp {
           </div>
         </div>
       </div>`;
-      this.articlesContainer.insertAdjacentHTML('afterbegin', newsContent);
+      this.articlesContainer.insertAdjacentHTML('beforeend', newsContent);
     });
   }
   // Hàm hiển thị & gắn event Pagination

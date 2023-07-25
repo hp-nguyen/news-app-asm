@@ -9,7 +9,6 @@ class User {
   }
   getAcronymName() {
     let fullName = `${this.lastName} ${this.firstName}`;
-    console.log(fullName)
     fullName = fullName.split(' ');
     const firstName = fullName.pop();
     const acronym = fullName.reduce((result, word) => result + word[0].toUpperCase(), '');

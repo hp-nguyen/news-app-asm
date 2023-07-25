@@ -99,7 +99,7 @@ submitBtn.addEventListener('click', function (e) {
   e.preventDefault()
   // Lấy dữ liệu nhập vào từ form 
   const data = {
-    fisrtName: inputFirstName.value,
+    firstName: inputFirstName.value,
     lastName: inputLastName.value,
     username: inputUsername.value,
     password: inputPassword.value,
