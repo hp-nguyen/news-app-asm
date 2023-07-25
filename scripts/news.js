@@ -6,10 +6,11 @@ const articlesFields = {
   nextBtn: document.querySelector('#btn-next'),
   pageNumEl: document.querySelector('#page-num'),
 };
+const newsLocalSettings = getFromStorage(newsLocalSettingsKey);
 const paramRules = {
   country: 'us',
-  pageSize: 5,
-  category: 'technology',
+  pageSize: newsLocalSettings?.pageSize || 5,
+  category: newsLocalSettings?.category || '',
 };
 
 const News = new NewsApp(articlesFields, paramRules);

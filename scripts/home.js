@@ -1,14 +1,16 @@
 'use strict';
 const welcomeMessage = document.querySelector('#welcome-message');
-const loginModal = document.querySelector('#login-modal');
 const logoutBtn = document.querySelector('#btn-logout');
+const mainContentEl = document.querySelector('#main-content');  // Element chứa nút logout
+// const loginModal = document.querySelector('#login-modal');
 // Xử lý nếu user login thành công
 if (currentUser) {
   const logonUser = new User(currentUser);
   welcomeMessage.textContent = `Welcome, ${logonUser.getAcronymName()}`;
   loginModal.style.display = 'none';
 } else {
-  loginModal.style.display = 'block';
+  mainContentEl.style.display = 'none';
+  // loginModal.style.display = 'block';
 }
 // Xử lý khi user logout
 logoutBtn.addEventListener('click', function () {

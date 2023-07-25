@@ -36,13 +36,14 @@ class NewsApp {
   // Hàm lấy url để fetch API
   getApiUrl() {
     const requestParams = this.paramRules.reduce(
-      (result, rule) => result + `&${rule[0]}=${rule[1]}`,
+      (result,[param, value]) => result + `&${param}=${value.toString().toLowerCase()}`,
       ''
     );
     const url =
       `https://newsapi.org/v2/top-headlines?page=${this.curPage}&apiKey=${
         this.#apiKey
       }` + requestParams;
+      console.log(url)
     return url;
   }
   // Hàm hiển thị Articles

@@ -5,6 +5,7 @@ const currentUserKey = 'currentUser';
 const currentUser = getFromStorage(currentUserKey);
 const todoArrKey = 'todoArr';
 const todoArr = getFromStorage(todoArrKey) || [];
+const newsLocalSettingsKey = 'localSettings';
 
 // Hàm lưu data vào local storage
 function saveToStorage(key, value) {
