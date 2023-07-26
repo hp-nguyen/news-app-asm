@@ -13,6 +13,7 @@ class NewsApp {
     this.handlePagination(); // Hiển thị pagination ngay khi tạo instance
     this.renderArticles(); // Hiển thị các tin tức ngay khi tạo instance
   }
+  // PUBLIC FIELDS
 
   // PRIVATE FIELDS
   // #apiKey = 'badb947b74ee46619d65444ed2fd40a9'; // D
@@ -35,15 +36,15 @@ class NewsApp {
   }
   // Hàm lấy url để fetch API
   getApiUrl() {
-    const requestParams = this.paramRules.reduce(
-      (result,[param, value]) => result + `&${param}=${value.toString().toLowerCase()}`,
-      ''
-    );
+    const requestParams = this.paramRules.reduce((result, [param, value]) => {
+      if (value === '') return result
+      return result + `&${param}=${value.toString().toLowerCase()}`;
+    }, '');
     const url =
-      `https://newsapi.org/v2/top-headlines?page=${this.curPage}&apiKey=${
-        this.#apiKey
-      }` + requestParams;
-      console.log(url)
+      'https://newsapi.org/v2/top-headlines?' +
+      `page=${this.curPage}` +
+      requestParams +
+      `&apiKey=${this.#apiKey}`;
     return url;
   }
   // Hàm hiển thị Articles
