@@ -15,8 +15,8 @@ const defaultNewsSettings = {
   category: 'General',
 };
 const newsLocalSettings =
-    getFromStorage(newsLocalSettingsKey) || defaultNewsSettings;
-    
+  getFromStorage(newsLocalSettingsKey) || defaultNewsSettings;
+
 // Hàm lưu data vào local storage
 function saveToStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));

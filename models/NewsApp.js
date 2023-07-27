@@ -15,8 +15,8 @@ class NewsApp {
   apiEndpoint = 'https://newsapi.org/v2/top-headlines?';
   // PRIVATE FIELDS
   // #apiKey = 'badb947b74ee46619d65444ed2fd40a9'; // D
-  // #apiKey = '450b75dfe6ff463e9dd16960ccb64378'; // P1
-  #apiKey = '7520e7cb1dec4c91b8144650a610a0cc'; // P2
+  #apiKey = '450b75dfe6ff463e9dd16960ccb64378'; // P1
+  // #apiKey = '7520e7cb1dec4c91b8144650a610a0cc'; // P2
   // PUBLIC METHODS
   // Hàm lấy dữ liệu từ API
   async getNewsData() {
@@ -48,12 +48,17 @@ class NewsApp {
   }
   // Hàm hiển thị Articles
   async renderArticles() {
-    // Reset
-    this.articlesContainer.innerHTML = '';
-    this.pageNumEl.textContent = this.curPage;
+    this.articlesContainer.innerHTML = ''; // Reset nội dung container
     const data = await this.getNewsData();
-    if (!data) return;
-    this.#displayPaginationBtns();
+    // Nếu không lấy được dữ liệu
+    if (!data) {
+      this.maxPage = 0;
+      this.#displayPaginationComponents();
+      return;
+    }
+    // Nếu lấy dữ liệu thành công
+    this.#displayPaginationComponents(); // Hiển thị điều hướng trang
+    // Nếu không có bài viết nào trong dữ liệu trả về
     if (data.totalResults === 0) {
       this.articlesContainer.insertAdjacentHTML(
         'afterbegin',
@@ -61,6 +66,7 @@ class NewsApp {
       );
       return;
     }
+    // Nếu có bài viết trong dữ liệu trả về
     const articles = data.articles;
     articles.forEach(article => {
       const newsContent = `<div class="card flex-row flex-wrap">
@@ -69,7 +75,9 @@ class NewsApp {
             <div class="col-md-4">
               <img src="${article.urlToImage ?? '../img/no-image-icon.png'}"
                 class="card-img"
-                alt="${article.title}" onerror="event.target.src='../img/no-image-icon.png'">
+                alt="${
+                  article.title
+                }" onerror="event.target.src='../img/no-image-icon.png'">
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -90,13 +98,15 @@ class NewsApp {
   }
   // Hàm hiển thị & gắn event Pagination
   handlePagination() {
-    this.#displayPaginationBtns();
+    this.#displayPaginationComponents();
     this.#handlePrevBtn();
     this.#handleNextBtn();
   }
   // PRIVATE METHODS
-  // Hàm kiểm tra & hiển thị prevBtn & nextBtn
-  #displayPaginationBtns() {
+  // Hàm kiểm tra & hiển thị các thành phần của pagination
+  #displayPaginationComponents() {
+    // Update & Hiển thị số trang hiện tại
+    this.pageNumEl.textContent = this.curPage;
     // Kiểm tra nút Previous
     if (this.curPage === 1) {
       // Ẩn nút này khi đang ở trang đầu tiên
@@ -112,14 +122,14 @@ class NewsApp {
   #handlePrevBtn() {
     // Không dùng addEventListener vì bị lặp event click ở nhiều instance khác nhau, dùng onclick để ghi đè event click
     this.prevBtn.onclick = () => {
-      this.pageNumEl.innerText = this.curPage -= 1;
+      this.curPage -= 1;
       this.renderArticles();
     };
   }
   // Xử lý sự kiện click nút Next
   #handleNextBtn() {
     this.nextBtn.onclick = () => {
-      this.pageNumEl.innerText = this.curPage += 1;
+      this.curPage += 1;
       this.renderArticles();
     };
   }

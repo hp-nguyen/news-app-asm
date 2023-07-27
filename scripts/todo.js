@@ -24,9 +24,9 @@ function renderTasks() {
 function addTask() {
   const taskContent = inputTaskEl.value.trim();
   if (!taskContent) {
-    alert('Please input task!')
-    return
-  };
+    alert('Please input task!');
+    return;
+  }
   const newTask = {
     owner: currentUser.username,
     task: taskContent,
@@ -39,7 +39,7 @@ function addTask() {
 }
 // Hàm thay đổi trạng thái của task
 function toggleTask(e) {
-  const currentTaskIndex = e.target.dataset.taskIndex // Index của task đang chọn
+  const currentTaskIndex = e.target.dataset.taskIndex; // Index của task đang chọn
   const currentTask = todoArr[currentTaskIndex]; // Task đang chọn
   // Toggle task đang chọn
   if (currentTask.isDone) {
@@ -56,11 +56,11 @@ function toggleTask(e) {
 }
 // Hàm xóa task
 function deleteTask(e) {
-  const currentTaskEl = e.target.parentElement  // Element hiển thị task đang chọn
-  const currentTaskIndex = currentTaskEl.dataset.taskIndex // Index của task đang chọn
-  currentTaskEl.remove()  // Xóa element hiển thị task đang chọn
+  const currentTaskEl = e.target.parentElement; // Element hiển thị task đang chọn
+  const currentTaskIndex = currentTaskEl.dataset.taskIndex; // Index của task đang chọn
+  currentTaskEl.remove(); // Xóa element hiển thị task đang chọn
   todoArr.splice(currentTaskIndex, 1); // Xóa task đang chọn khỏi todoArr
-  saveToStorage(todoArrKey, todoArr)
+  saveToStorage(todoArrKey, todoArr);
 }
 // Hiển thị task và xử lý các sự kiện nếu người dùng đã login
 if (currentUser) {

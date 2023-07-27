@@ -8,7 +8,6 @@ const inputConfirmPassword = document.querySelector('#input-password-confirm');
 const formFields = registerForm.querySelectorAll('.form-control');
 const submitBtn = document.querySelector('#btn-submit');
 
-
 // Hàm báo lỗi khi nhập sai thông tin
 function showInvalidMessage(field, message) {
   // Element hiện thông báo cho trường bỏ trống
@@ -39,7 +38,7 @@ function emptyFieldCheck(field) {
 // Hàm kiểm tra xem có bất kỳ trường nào bị bỏ trống hay không
 function noEmptyCheck(fields) {
   let isValid = true; // True có nghĩa là không có trường nào bị bỏ trống
-  fields.forEach((field) => {
+  fields.forEach(field => {
     if (emptyFieldCheck(field)) isValid = false;
   });
   return isValid;
@@ -80,12 +79,12 @@ function confirmPasswordCheck(confirmPasswordField) {
 }
 // Hàm validate tất cả data của form
 function validateData() {
-  let isValid = true
-  if (!noEmptyCheck(formFields)) isValid = false
-  if (!usernameCheck(inputUsername)) isValid = false
-  if (!passwordCheck(inputPassword)) isValid = false
-  if (!confirmPasswordCheck(inputConfirmPassword)) isValid = false
-  return isValid
+  let isValid = true;
+  if (!noEmptyCheck(formFields)) isValid = false;
+  if (!usernameCheck(inputUsername)) isValid = false;
+  if (!passwordCheck(inputPassword)) isValid = false;
+  if (!confirmPasswordCheck(inputConfirmPassword)) isValid = false;
+  return isValid;
 }
 // Validate khi đang input
 for (let i = 0; i < formFields.length; i++) {
@@ -96,21 +95,21 @@ for (let i = 0; i < formFields.length; i++) {
 
 // Xử lý khi submit form
 submitBtn.addEventListener('click', function (e) {
-  e.preventDefault()
-  // Lấy dữ liệu nhập vào từ form 
+  e.preventDefault();
+  // Lấy dữ liệu nhập vào từ form
   const data = {
     firstName: inputFirstName.value,
     lastName: inputLastName.value,
     username: inputUsername.value,
     password: inputPassword.value,
-  }
+  };
   // Kiểm tra form hợp lệ
-  if (!validateData()) return
+  if (!validateData()) return;
   // Khởi tạo user mới với các dữ liệu hợp lệ
-  const newUser = new User(data)
+  const newUser = new User(data);
   // Thêm user vào mảng, lưu mảng vào localStorage
-  userArr.push(newUser)
-  saveToStorage(usersKey, userArr)
+  userArr.push(newUser);
+  saveToStorage(usersKey, userArr);
   // Chuyển trang đến màn hình login
-  window.location.href = './login.html'
+  window.location.href = './login.html';
 });

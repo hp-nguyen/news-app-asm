@@ -38,13 +38,13 @@ function emptyFieldCheck(field) {
 inputSearchEl.addEventListener('input', function () {
   emptyFieldCheck(this);
 });
-inputSearchEl.addEventListener('focusout', function() {
-  removeInvalidMessage(this)
-} )
+inputSearchEl.addEventListener('focusout', function () {
+  removeInvalidMessage(this);
+});
 // Hàm lấy từ khóa từ input
 function getSearchKeyword() {
   let keyword = inputSearchEl.value.trim().toLowerCase();
-  keyword = `${keyword.replaceAll(' ', '%20')}`;  // Chuyển thành url-encoded
+  keyword = `%22${keyword.replaceAll(' ', '%20')}%22`; // Chuyển thành url-encoded
   return keyword;
 }
 

@@ -2,7 +2,7 @@
 const logoutUIContainer = document.querySelector('#login-modal'); // Container phần giao diện khi chưa login
 const welcomeMessage = document.querySelector('#welcome-message');
 const logoutBtn = document.querySelector('#btn-logout');
-const loginUIContainer = document.querySelector('#main-content');  // Container phần giao diện khi đã login
+const loginUIContainer = document.querySelector('#main-content'); // Container phần giao diện khi đã login
 // Xử lý nếu user login thành công
 if (currentUser) {
   const logonUser = new User(currentUser);

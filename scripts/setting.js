@@ -1,7 +1,7 @@
 'use strict';
 const inputPageSize = document.querySelector('#input-page-size');
 const inputCategory = document.querySelector('#input-category');
-const settingsFormEl = document.querySelector('#settings-form')
+const settingsFormEl = document.querySelector('#settings-form');
 const saveBtn = document.querySelector('#btn-submit');
 
 // Hàm hiển thị các settings từ local storage
