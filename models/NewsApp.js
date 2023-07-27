@@ -67,9 +67,9 @@ class NewsApp {
         <div class="card mb-3">
           <div class="row no-gutters">
             <div class="col-md-4">
-              <img src="${article.urlToImage ?? `..\\\\img\\no-image-icon.png`}"
+              <img src="${article.urlToImage ?? '../img/no-image-icon.png'}"
                 class="card-img"
-                alt="${article.title}">
+                alt="${article.title}" onerror="event.target.src='../img/no-image-icon.png'">
             </div>
             <div class="col-md-8">
               <div class="card-body">
