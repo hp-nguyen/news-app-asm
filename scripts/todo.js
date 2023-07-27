@@ -1,4 +1,7 @@
 'use strict';
+const addBtn = document.querySelector('#btn-add');
+const tasksContainer = document.querySelector('#todo-list');
+const inputTaskEl = document.querySelector('#input-task');
 class Todo {
   constructor(taskInfo) {
     this.owner = taskInfo.username;
@@ -6,9 +9,7 @@ class Todo {
     this.isDone = taskInfo.isDone;
   }
 }
-const addBtn = document.querySelector('#btn-add');
-const tasksContainer = document.querySelector('#todo-list');
-const inputTaskEl = document.querySelector('#input-task');
+
 // Hàm render tất cả tasks của currentUser
 function renderTasks() {
   tasksContainer.innerHTML = '';
@@ -19,6 +20,7 @@ function renderTasks() {
   });
 }
 
+// Hàm thêm task mới
 function addTask() {
   const taskContent = inputTaskEl.value.trim();
   if (!taskContent) {
@@ -35,6 +37,7 @@ function addTask() {
   saveToStorage(todoArrKey, todoArr);
   inputTaskEl.value = '';
 }
+// Hàm thay đổi trạng thái của task
 function toggleTask(e) {
   const currentTaskIndex = e.target.dataset.taskIndex // Index của task đang chọn
   const currentTask = todoArr[currentTaskIndex]; // Task đang chọn
@@ -51,6 +54,7 @@ function toggleTask(e) {
     saveToStorage(todoArrKey, todoArr);
   }
 }
+// Hàm xóa task
 function deleteTask(e) {
   const currentTaskEl = e.target.parentElement  // Element hiển thị task đang chọn
   const currentTaskIndex = currentTaskEl.dataset.taskIndex // Index của task đang chọn
@@ -58,6 +62,7 @@ function deleteTask(e) {
   todoArr.splice(currentTaskIndex, 1); // Xóa task đang chọn khỏi todoArr
   saveToStorage(todoArrKey, todoArr)
 }
+// Hiển thị task và xử lý các sự kiện nếu người dùng đã login
 if (currentUser) {
   renderTasks();
   addBtn.addEventListener('click', addTask);

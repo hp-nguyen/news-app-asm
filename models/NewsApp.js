@@ -10,14 +10,13 @@ class NewsApp {
     this.articlesPerPage = paramRules.pageSize; // Số bài báo hiển thị mỗi trang
     this.totalArticles; // Tổng số bài báo
     this.maxPage; // Số trang tối đa có thể hiển thị
-    this.handlePagination(); // Hiển thị pagination ngay khi tạo instance
-    this.renderArticles(); // Hiển thị các tin tức ngay khi tạo instance
   }
   // PUBLIC FIELDS
-
+  apiEndpoint = 'https://newsapi.org/v2/top-headlines?';
   // PRIVATE FIELDS
   // #apiKey = 'badb947b74ee46619d65444ed2fd40a9'; // D
-  #apiKey = '450b75dfe6ff463e9dd16960ccb64378'; // P
+  // #apiKey = '450b75dfe6ff463e9dd16960ccb64378'; // P1
+  #apiKey = '7520e7cb1dec4c91b8144650a610a0cc'; // P2
   // PUBLIC METHODS
   // Hàm lấy dữ liệu từ API
   async getNewsData() {
@@ -25,23 +24,23 @@ class NewsApp {
       const url = this.getApiUrl();
       const response = await fetch(url); // Dữ liệu JSON trả về từ API
       const newsData = await response.json(); // Lấy dữ liệu từ JSON
-      if (!response.ok) throw new Error(response.status);
+      if (!response.ok) throw new Error(newsData.message);
       this.totalArticles = newsData.totalResults; // Tổng số articles lấy được
       this.maxPage = Math.ceil(this.totalArticles / this.articlesPerPage); // Số trang tối đa
       return newsData;
     } catch (err) {
-      console.error(`Fetching API failed ... ${err}`);
+      console.error(`Fetching API failed. Message: "${err.message}"`);
       return undefined;
     }
   }
   // Hàm lấy url để fetch API
   getApiUrl() {
     const requestParams = this.paramRules.reduce((result, [param, value]) => {
-      if (value === '') return result
+      if (value === '') return result;
       return result + `&${param}=${value.toString().toLowerCase()}`;
     }, '');
     const url =
-      'https://newsapi.org/v2/top-headlines?' +
+      this.apiEndpoint +
       `page=${this.curPage}` +
       requestParams +
       `&apiKey=${this.#apiKey}`;
@@ -49,10 +48,19 @@ class NewsApp {
   }
   // Hàm hiển thị Articles
   async renderArticles() {
+    // Reset
     this.articlesContainer.innerHTML = '';
+    this.pageNumEl.textContent = this.curPage;
     const data = await this.getNewsData();
     if (!data) return;
     this.#displayPaginationBtns();
+    if (data.totalResults === 0) {
+      this.articlesContainer.insertAdjacentHTML(
+        'afterbegin',
+        `<p class="text-center">We couldn't find any articles</p>`
+      );
+      return;
+    }
     const articles = data.articles;
     articles.forEach(article => {
       const newsContent = `<div class="card flex-row flex-wrap">
@@ -96,22 +104,23 @@ class NewsApp {
     } else this.prevBtn.style.display = 'block';
 
     // Kiểm tra nút Next
-    if (this.curPage === this.maxPage) {
+    if (this.curPage >= this.maxPage) {
       this.nextBtn.style.display = 'none'; // Ẩn nút này khi đang ở trang cuối cùng
     } else this.nextBtn.style.display = 'block';
   }
   // Xử lý sự kiện click nút Prev
   #handlePrevBtn() {
-    this.prevBtn.addEventListener('click', () => {
+    // Không dùng addEventListener vì bị lặp event click ở nhiều instance khác nhau, dùng onclick để ghi đè event click
+    this.prevBtn.onclick = () => {
       this.pageNumEl.innerText = this.curPage -= 1;
       this.renderArticles();
-    });
+    };
   }
   // Xử lý sự kiện click nút Next
   #handleNextBtn() {
-    this.nextBtn.addEventListener('click', () => {
+    this.nextBtn.onclick = () => {
       this.pageNumEl.innerText = this.curPage += 1;
       this.renderArticles();
-    });
+    };
   }
 }

@@ -6,13 +6,6 @@ const saveBtn = document.querySelector('#btn-submit');
 
 // Hàm hiển thị các settings từ local storage
 function showNewsSettings() {
-  const defaultNewsSettings = {
-    pageSize: 5,
-    category: 'General',
-  };
-  const newsLocalSettings =
-    getFromStorage(newsLocalSettingsKey) || defaultNewsSettings;
-
   inputPageSize.value = newsLocalSettings.pageSize;
   inputCategory.value = newsLocalSettings.category;
 }
