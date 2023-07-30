@@ -15,7 +15,9 @@ function renderTasks() {
   tasksContainer.innerHTML = '';
   todoArr.forEach((task, i) => {
     if (task.owner !== currentUser.username) return;
-    const taskEl = `<li class="task ${task.isDone ? 'checked' : ''}" data-task-index=${i}>${task.task}<span class="close">×</span></li>`;
+    const taskEl = `<li class="task ${
+      task.isDone ? 'checked' : ''
+    }" data-task-index=${i}>${task.task}<span class="close">×</span></li>`;
     tasksContainer.insertAdjacentHTML('beforeend', taskEl);
   });
 }
@@ -70,4 +72,6 @@ if (currentUser) {
     if (e.target.classList.contains('task')) toggleTask(e);
     if (e.target.classList.contains('close')) deleteTask(e);
   });
+} else {
+  tasksContainer.textContent = 'Please login to use this feature!';
 }

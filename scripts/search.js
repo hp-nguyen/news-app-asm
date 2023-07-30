@@ -1,6 +1,18 @@
 'use strict';
+// Các thành phần của search form
 const searchFormEl = document.querySelector('#search-form');
 const inputSearchEl = document.querySelector('#input-query');
+// Các thành phần của News UI
+const articlesContainer = document.querySelector('#news-container');
+const prevBtn = document.querySelector('#btn-prev');
+const nextBtn = document.querySelector('#btn-next');
+const pageNumEl = document.querySelector('#page-num');
+const articlesFields = {
+  articlesContainer,
+  prevBtn,
+  nextBtn,
+  pageNumEl,
+};
 // Class News với apiEndpoint khác
 class SearchNews extends NewsApp {
   apiEndpoint = 'https://newsapi.org/v2/everything?';
@@ -47,31 +59,33 @@ function getSearchKeyword() {
   keyword = `%22${keyword.replaceAll(' ', '%20')}%22`; // Chuyển thành url-encoded
   return keyword;
 }
+// Khi user đã login
+if (currentUser) {
+  // Xử lý khi user search articles
+  searchFormEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    // Kiểm tra user đã nhập từ khóa chưa
+    if (emptyFieldCheck(inputSearchEl)) return;
+    // Lấy search keyword
+    const searchKeyword = getSearchKeyword();
+    // Các cài đặt tham số của API url
+    const paramRules = {
+      pageSize: newsLocalSettings.pageSize,
+      q: searchKeyword,
+      sortBy: 'relevancy',
+      // country: 'us',
+      // category: newsLocalSettings.category,
+    };
 
-// XỬ LÝ KHI USER SEARCH ARTICLES
-searchFormEl.addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (emptyFieldCheck(inputSearchEl)) return;
-  // Các thành phần của News UI
-  const articlesFields = {
-    articlesContainer: document.querySelector('#news-container'),
-    prevBtn: document.querySelector('#btn-prev'),
-    nextBtn: document.querySelector('#btn-next'),
-    pageNumEl: document.querySelector('#page-num'),
-  };
-
-  // Lấy search keyword
-  const searchKeyword = getSearchKeyword();
-
-  // Các cài đặt tham số của API url
-  const paramRules = {
-    pageSize: newsLocalSettings.pageSize,
-    q: searchKeyword,
-    // country: 'us',
-    // category: newsLocalSettings.category,
-  };
-  // Tạo instance hiển thị các bài viết
-  const News = new SearchNews(articlesFields, paramRules);
-  News.renderArticles();
-  News.handlePagination();
-});
+    // Tạo instance hiển thị các bài viết
+    const News = new SearchNews(articlesFields, paramRules);
+    News.renderArticles();
+    News.handlePagination();
+  });
+} else {
+  // Khi user chưa login
+  searchFormEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+  });
+  articlesContainer.textContent = 'Please login to use this feature!';
+}

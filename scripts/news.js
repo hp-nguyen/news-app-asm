@@ -13,7 +13,12 @@ const paramRules = {
   category: newsLocalSettings.category,
 };
 
-// Tạo instance hiển thị các bài viết
-const News = new NewsApp(articlesFields, paramRules);
-News.renderArticles(); // Hiển thị bài viết
-News.handlePagination(); // Hiển thị và xử lý sự kiện cho các nút điều hướng trang
+// Khi user đã login
+if (currentUser) {
+  // Tạo instance hiển thị các bài viết
+  const News = new NewsApp(articlesFields, paramRules);
+  News.renderArticles(); // Hiển thị bài viết
+  News.handlePagination(); // Hiển thị và xử lý sự kiện cho các nút điều hướng trang
+} else { // khi user chưa login
+  articlesFields.articlesContainer.textContent = 'Please login to use this feature!'
+}

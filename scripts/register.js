@@ -10,9 +10,8 @@ const submitBtn = document.querySelector('#btn-submit');
 
 // Hàm báo lỗi khi nhập sai thông tin
 function showInvalidMessage(field, message) {
-  // Element hiện thông báo cho trường bỏ trống
-  field.classList.add('invalid');
-  const invalidMessageEl = field.nextElementSibling;
+  field.classList.add('invalid'); // Đổi style cho trường bị sai thông tin
+  const invalidMessageEl = field.nextElementSibling;  // Element hiện thông báo tương ứng
   invalidMessageEl.textContent = message;
 }
 
@@ -22,6 +21,7 @@ function removeInvalidMessage(field) {
   const invalidMessageEl = field.nextElementSibling;
   invalidMessageEl.textContent = '';
 }
+
 // Hàm kiểm tra trường bị bỏ trống
 function emptyFieldCheck(field) {
   // Khi field bị bỏ trống
@@ -35,6 +35,7 @@ function emptyFieldCheck(field) {
     return false;
   }
 }
+
 // Hàm kiểm tra xem có bất kỳ trường nào bị bỏ trống hay không
 function noEmptyCheck(fields) {
   let isValid = true; // True có nghĩa là không có trường nào bị bỏ trống
@@ -43,6 +44,7 @@ function noEmptyCheck(fields) {
   });
   return isValid;
 }
+
 // Hàm kiểm tra username có trùng hay không
 function usernameCheck(usernameField) {
   if (userArr.length > 0) {
@@ -55,6 +57,7 @@ function usernameCheck(usernameField) {
   }
   return true;
 }
+
 // Hàm kiểm tra password
 function passwordCheck(passwordField) {
   if (passwordField.value.length > 0 && passwordField.value.length < 9) {
@@ -66,6 +69,7 @@ function passwordCheck(passwordField) {
   }
   return true;
 }
+
 // Hàm kiểm tra confirm password
 function confirmPasswordCheck(confirmPasswordField) {
   if (confirmPasswordField.value !== inputPassword.value) {
@@ -77,6 +81,7 @@ function confirmPasswordCheck(confirmPasswordField) {
   }
   return true;
 }
+
 // Hàm validate tất cả data của form
 function validateData() {
   let isValid = true;
@@ -86,6 +91,7 @@ function validateData() {
   if (!confirmPasswordCheck(inputConfirmPassword)) isValid = false;
   return isValid;
 }
+
 // Validate khi đang input
 for (let i = 0; i < formFields.length; i++) {
   formFields[i].addEventListener('input', function () {
