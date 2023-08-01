@@ -69,30 +69,30 @@ class NewsApp {
     // Nếu có bài viết trong dữ liệu trả về
     const articles = data.articles;
     articles.forEach(article => {
-      const newsContent = `<div class="card flex-row flex-wrap">
-        <div class="card mb-3">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="${article.urlToImage ?? '../img/no-image-icon.png'}"
-                class="card-img"
-                alt="${
-                  article.title
-                }" onerror="event.target.src='../img/no-image-icon.png'">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">${article.title}</h5>
-                <p class="card-text">${
-                  article.description ?? 'No description available'
-                }</p>
-                <a href="${
-                  article.url
-                }" class="btn btn-primary" target="_blank">View</a>
-              </div>
-            </div>
+      const newsContent = `<div class="card flex-row flex-wrap mb-3 p-2">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img
+            src="${article.urlToImage}"
+            class="card-img"
+            alt="${article.title}"
+            onerror="event.target.src='../img/no-image-icon.png'" />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">${article.title}</h5>
+            <p class="card-text">
+              ${ article.description ?? 'No description available' }
+            </p>
+            <a
+              href="${article.url}"
+              class="btn btn-primary"
+              target="_blank"
+              >View</a>
           </div>
         </div>
-      </div>`;
+      </div>
+    </div>`;
       this.articlesContainer.insertAdjacentHTML('beforeend', newsContent);
     });
   }
