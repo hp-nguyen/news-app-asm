@@ -59,9 +59,9 @@ function toggleTask(e) {
 // Hàm xóa task
 function deleteTask(e) {
   const currentTaskEl = e.target.parentElement; // Element hiển thị task đang chọn
-  const currentTaskIndex = currentTaskEl.dataset.taskIndex; // Index của task đang chọn
-  currentTaskEl.remove(); // Xóa element hiển thị task đang chọn
+  const currentTaskIndex = currentTaskEl.dataset.taskIndex; // Index của task đang chọn trong todoArr
   todoArr.splice(currentTaskIndex, 1); // Xóa task đang chọn khỏi todoArr
+  renderTasks();  //  Render lại các task
   saveToStorage(todoArrKey, todoArr);
 }
 // Hiển thị task và xử lý các sự kiện nếu người dùng đã login
