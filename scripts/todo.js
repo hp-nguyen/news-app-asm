@@ -22,7 +22,7 @@ function renderTasks() {
   });
 }
 
-// Hàm thêm task mới
+// Hàm thêm task mới vào todoArr & cập nhật todoArr vào local storage
 function addTask() {
   const taskContent = inputTaskEl.value.trim();
   if (!taskContent) {
