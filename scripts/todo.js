@@ -2,9 +2,11 @@
 const addBtn = document.querySelector('#btn-add');
 const tasksContainer = document.querySelector('#todo-list');
 const inputTaskEl = document.querySelector('#input-task');
-class Todo {
+
+// Class TodoTask
+class TodoTask {
   constructor(taskInfo) {
-    this.owner = taskInfo.username;
+    this.owner = taskInfo.owner;
     this.task = taskInfo.task;
     this.isDone = taskInfo.isDone;
   }
@@ -29,11 +31,12 @@ function addTask() {
     alert('Please input task!');
     return;
   }
-  const newTask = {
+  const newTaskInfo = {
     owner: currentUser.username,
     task: taskContent,
     isDone: false,
   };
+  const newTask = new TodoTask(newTaskInfo)
   todoArr.push(newTask);
   renderTasks();
   saveToStorage(todoArrKey, todoArr);
