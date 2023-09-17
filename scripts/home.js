@@ -23,4 +23,4 @@ logoutBtn.addEventListener('click', function () {
 
 // Test API
 const KEY = 'de6c2f16dcee940a0727c754009e0d38'
-fetch('http://api.mediastack.com/v1/news?access_key=de6c2f16dcee940a0727c754009e0d38').then(res => res.json()).then(data => console.log(data))
+fetch('https://api.spaceflightnewsapi.net/v4/articles/').then(res => res.json()).then(data => console.log(data))
