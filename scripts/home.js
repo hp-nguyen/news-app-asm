@@ -23,4 +23,4 @@ logoutBtn.addEventListener('click', function () {
 
 // Test API
 const KEY = 'de6c2f16dcee940a0727c754009e0d38'
-fetch('https://api.spaceflightnewsapi.net/v4/articles/').then(res => res.json()).then(data => console.log(data))
+fetch('https://newsdata.io/api/1/news?apikey=pub_31788f70b8d78cf9806d7046786a547de816f').then(res => res.json()).then(data => console.log(data))

@@ -12,11 +12,13 @@ class NewsApp {
     this.maxPage; // Số trang tối đa có thể hiển thị
   }
   // PUBLIC FIELDS
-  apiEndpoint = 'https://newsapi.org/v2/top-headlines?';
+  // apiEndpoint = 'https://newsapi.org/v2/top-headlines?';
+  apiEndpoint = 'https://newsdata.io/api/1/news?';
   // PRIVATE FIELDS
   // #apiKey = 'badb947b74ee46619d65444ed2fd40a9'; // D
-  #apiKey = '450b75dfe6ff463e9dd16960ccb64378'; // P1
+  // #apiKey = '450b75dfe6ff463e9dd16960ccb64378'; // P1
   // #apiKey = '7520e7cb1dec4c91b8144650a610a0cc'; // P2
+  #apiKey='pub_31788f70b8d78cf9806d7046786a547de816f'
   // PUBLIC METHODS
   // Hàm lấy dữ liệu từ API
   async getNewsData() {
@@ -41,7 +43,7 @@ class NewsApp {
     }, '');
     const url =
       this.apiEndpoint +
-      `page=${this.curPage}` +
+      // `page=${this.curPage}` +
       requestParams +
       `&apiKey=${this.#apiKey}`;
     return url;
@@ -67,7 +69,7 @@ class NewsApp {
       return;
     }
     // Nếu có bài viết trong dữ liệu trả về
-    const articles = data.articles;
+    const articles = data.results;
     articles.forEach(article => {
       const newsContent = `<div class="card flex-row flex-wrap mb-3 p-2">
       <div class="row no-gutters">
